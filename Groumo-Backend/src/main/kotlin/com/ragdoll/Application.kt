@@ -1,5 +1,6 @@
 package com.ragdoll
 
+import com.ragdoll.dao.DatabaseFactory
 import io.ktor.server.application.*
 import com.ragdoll.plugins.*
 
@@ -8,6 +9,7 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused")
 fun Application.module() {
+    DatabaseFactory.init(environment.config)
     configureSerialization()
     configureRouting()
 }
