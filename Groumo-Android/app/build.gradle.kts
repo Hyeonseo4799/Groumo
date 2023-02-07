@@ -46,6 +46,8 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:login"))
+
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
