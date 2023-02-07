@@ -12,7 +12,7 @@ object DatabaseFactory {
         val user = config.property("storage.user").getString()
         val password = config.property("storage.password").getString()
 
-        val database = Database.connect(jdbcURL, driverClassName,user, password)
+        val database = Database.connect(jdbcURL, driverClassName, user, password)
 
         transaction(database) {
             SchemaUtils.create(User)
