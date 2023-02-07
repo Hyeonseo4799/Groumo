@@ -10,6 +10,7 @@ androidx-activity = "1.6.1"
 kakao = "2.12.1"
 hilt = "2.44"
 androidx-hilt = "1.0.0"
+navigation = "2.5.3"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android" }
@@ -27,4 +28,5 @@ androidx-activity = { module = "androidx.activity:activity-compose", version.ref
 kakao-user = { module = "com.kakao.sdk:v2-user", version.ref = "kakao" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-androidx-hilt = {module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt"}
+androidx-hilt = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }

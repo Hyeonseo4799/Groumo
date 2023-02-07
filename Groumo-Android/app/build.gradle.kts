@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.kakao.user)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt)
+    implementation(libs.androidx.navigation.compose)
     kapt(libs.hilt.compiler)
 }
 
