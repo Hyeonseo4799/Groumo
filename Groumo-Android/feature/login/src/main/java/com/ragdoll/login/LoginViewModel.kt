@@ -7,9 +7,10 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.ragdoll.util.context
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
     companion object {
         const val TAG = "KAKAO_LOGIN"
     }

@@ -6,6 +6,7 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
