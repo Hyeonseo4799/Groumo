@@ -3,6 +3,7 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
 }
@@ -51,6 +52,9 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.activity)
     implementation(libs.kakao.user)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt)
+    kapt(libs.hilt.compiler)
 }
 
 fun getApiKey(propertyKey: String) = gradleLocalProperties(rootDir).getProperty(propertyKey)
