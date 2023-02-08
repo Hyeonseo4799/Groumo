@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 rootProject.name = "Groumo"
 include(":app")
 include(":feature:login")
+include(":core:network")
+include(":core:data")
+include(":core:domain")
