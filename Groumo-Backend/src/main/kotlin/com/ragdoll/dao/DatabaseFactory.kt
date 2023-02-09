@@ -2,7 +2,9 @@ package com.ragdoll.dao
 
 import com.ragdoll.model.User
 import io.ktor.server.config.*
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
@@ -18,4 +20,7 @@ object DatabaseFactory {
             SchemaUtils.create(User)
         }
     }
+
+    suspend fun <T> dbQuery(block: suspend () -> T): T =
+        newSuspendedTransaction(Dispatchers.IO) { block() }
 }
