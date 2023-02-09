@@ -7,6 +7,6 @@ class GroumoDataSourceImpl @Inject constructor(
     private val groumoApi: GroumoApi
 ) : GroumoDataSource {
     override suspend fun signUp(platform: String, token: String) {
-        groumoApi.signUp(platform, token)
+        groumoApi.signUp(token, platform)
     }
 }
