@@ -8,7 +8,12 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.jetbrains.exposed.exceptions.ExposedSQLException
+import org.jetbrains.exposed.sql.transactions.transaction
+import java.sql.BatchUpdateException
+import java.sql.SQLIntegrityConstraintViolationException
 
 const val KAKAO = "kakao"
 const val GOOGLE = "google"
@@ -25,14 +30,18 @@ fun Route.userRoute(dao: DAOFacade, client: HttpClient) {
                     }
                 }.body()
 
-                dao.insertUser(
-                    KAKAO,
-                    userInfo.properties.nickname,
-                    userInfo.properties.thumbnailImage,
-                    userInfo.kakaoAccount.email
-                )
+                try {
+                    dao.insertUser(
+                        KAKAO,
+                        userInfo.properties.nickname,
+                        userInfo.properties.thumbnailImage,
+                        userInfo.kakaoAccount.email
+                    )
+                    call.respondText("User stored correctly", status = HttpStatusCode.Created)
+                } catch (e: SQLIntegrityConstraintViolationException) {
+                    call.respondText("SQL constraint violated", status = HttpStatusCode.InternalServerError)
+                }
             }
-
             GOOGLE -> {}
         }
     }
