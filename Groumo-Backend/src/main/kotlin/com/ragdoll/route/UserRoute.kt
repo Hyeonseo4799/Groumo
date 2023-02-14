@@ -2,6 +2,7 @@ package com.ragdoll.route
 
 import com.ragdoll.dao.DAOFacade
 import com.ragdoll.model.KakaoUser
+import com.ragdoll.model.Response
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -11,7 +12,6 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.jetbrains.exposed.exceptions.ExposedSQLException
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.BatchUpdateException
 import java.sql.SQLIntegrityConstraintViolationException
 
@@ -37,11 +37,30 @@ fun Route.userRoute(dao: DAOFacade, client: HttpClient) {
                         userInfo.properties.thumbnailImage,
                         userInfo.kakaoAccount.email
                     )
-                    call.respondText("User stored correctly", status = HttpStatusCode.Created)
-                } catch (e: SQLIntegrityConstraintViolationException) {
-                    call.respondText("SQL constraint violated", status = HttpStatusCode.InternalServerError)
+                    call.respond(Response(code = HttpStatusCode.Created.value, error = null))
+                } catch (e: Exception) {
+                    when ((e as? ExposedSQLException)?.cause) {
+                        is BatchUpdateException, is SQLIntegrityConstraintViolationException -> {
+                            call.respond(
+                                Response(
+                                    code = HttpStatusCode.BadRequest.value,
+                                    error = "이미 회원가입 된 유저입니다."
+                                )
+                            )
+                        }
+
+                        else -> {
+                            call.respond(
+                                Response(
+                                    code = HttpStatusCode.InternalServerError.value,
+                                    error = "예기치 못한 오류"
+                                )
+                            )
+                        }
+                    }
                 }
             }
+
             GOOGLE -> {}
         }
     }
