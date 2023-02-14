@@ -1,5 +1,6 @@
 package com.ragdoll.network.retrofit
 
+import com.ragdoll.network.model.NetworkResponse
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -9,5 +10,5 @@ interface GroumoApi {
     suspend fun signUp(
         @Header("token") token: String,
         @Path("platform") platform: String
-    )
+    ): NetworkResponse
 }

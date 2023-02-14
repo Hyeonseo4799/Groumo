@@ -11,6 +11,9 @@ import com.ragdoll.util.context
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.ragdoll.common.result.Result
+import com.ragdoll.common.result.asResult
+import kotlinx.coroutines.flow.collect
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -28,18 +31,24 @@ class LoginViewModel @Inject constructor(
                 error != null -> Log.e(TAG, "Failed to login with Kakao account : $error")
                 token != null -> {
                     Log.d(TAG, "Successful login with Kakao : $token")
-                    viewModelScope.launch { signUpUseCase(PLATFORM_KAKAO, token.accessToken) }
+                    viewModelScope.launch {
+                        signUpUseCase(token.accessToken, PLATFORM_KAKAO).asResult()
+                            .collect { result ->
+                                when (result) {
+                                    is Result.Error -> Log.e(
+                                        TAG,
+                                        result.message?.localizedMessage ?: "Unexpected error"
+                                    )
+                                    is Result.Success -> Log.d(TAG, "Sign up successfully")
+                                    Result.Loading -> Log.d(TAG, "Loading")
+                                }
+                            }
+                    }
                 }
             }
         }
 
-        with(UserApiClient.instance) {
-            if (isKakaoTalkLoginAvailable(context)) {
-                loginWithKakaoTalk(context, callback = callback)
-            } else {
-                loginWithKakaoAccount(context, callback = callback)
-            }
-        }
+        UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
     }
 }
 

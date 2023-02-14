@@ -23,6 +23,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:common"))
+
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
@@ -32,4 +34,8 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt)
     kapt(libs.hilt.compiler)
+
+    implementation("com.squareup.okhttp3:okhttp:4.2.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
 }
