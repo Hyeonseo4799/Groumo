@@ -1,6 +1,6 @@
 package com.ragdoll.dao
 
-import com.ragdoll.model.User
+import com.ragdoll.model.Users
 import io.ktor.server.config.*
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.*
@@ -17,7 +17,7 @@ object DatabaseFactory {
         val database = Database.connect(jdbcURL, driverClassName, user, password)
 
         transaction(database) {
-            SchemaUtils.create(User)
+            SchemaUtils.create(Users)
         }
     }
 
