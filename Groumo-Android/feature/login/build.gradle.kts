@@ -26,6 +26,7 @@ dependencies {
 
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":core:model"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
@@ -35,5 +36,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle)
     kapt(libs.hilt.compiler)
 }

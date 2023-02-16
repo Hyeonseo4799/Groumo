@@ -33,9 +33,6 @@ dependencies {
     implementation(libs.retrofit.converter)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt)
+    implementation(libs.kotlinx.serialization)
     kapt(libs.hilt.compiler)
-
-    implementation("com.squareup.okhttp3:okhttp:4.2.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
 }

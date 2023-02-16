@@ -9,6 +9,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     Button(onClick = { viewModel.kakaoLogin() }) {
-        Text(text = stringResource(id = R.string.kakao_login))
+        Text(stringResource(R.string.kakao_login))
     }
 }
