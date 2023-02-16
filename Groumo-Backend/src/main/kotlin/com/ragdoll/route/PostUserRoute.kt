@@ -2,6 +2,7 @@ package com.ragdoll.route
 
 import com.ragdoll.dao.DAOFacade
 import com.ragdoll.model.KakaoUser
+import com.ragdoll.model.User
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -25,12 +26,10 @@ fun Route.postUserRoute(dao: DAOFacade, client: HttpClient) {
                 }.body()
 
                 with(userInfo) {
-                    if (dao.getUser(KAKAO, kakaoAccount.email) != null) {
-                        call.respond(HttpStatusCode.Conflict)
-                    } else {
+                    if (dao.getUser(KAKAO, kakaoAccount.email) == null)
                         dao.insertUser(KAKAO, properties.nickname, properties.thumbnailImage, kakaoAccount.email)
-                        call.respond(HttpStatusCode.Created.value)
-                    }
+
+                    call.respond(HttpStatusCode.OK, dao.getUser(KAKAO, kakaoAccount.email) ?: HttpStatusCode.InternalServerError)
                 }
             }
 
