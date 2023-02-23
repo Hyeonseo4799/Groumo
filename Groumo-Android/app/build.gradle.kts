@@ -48,10 +48,12 @@ android {
 dependencies {
 
     implementation(project(":feature:login"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
+    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.activity)
     implementation(libs.kakao.user)

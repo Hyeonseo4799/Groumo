@@ -1,3 +1,4 @@
 <resources>
+    <string name="app_name_lowercase">Groumo</string>
     <string name="kakao_login">카카오 로그인</string>
 </resources>
