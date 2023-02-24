@@ -1,5 +1,7 @@
 package com.ragdoll.dao
 
+import com.ragdoll.model.GroupUsers
+import com.ragdoll.model.Groups
 import com.ragdoll.model.Users
 import io.ktor.server.config.*
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +19,7 @@ object DatabaseFactory {
         val database = Database.connect(jdbcURL, driverClassName, user, password)
 
         transaction(database) {
-            SchemaUtils.create(Users)
+            SchemaUtils.create(Users, Groups, GroupUsers)
         }
     }
 

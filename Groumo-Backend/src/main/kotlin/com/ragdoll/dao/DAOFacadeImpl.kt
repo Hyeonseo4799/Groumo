@@ -1,8 +1,7 @@
 package com.ragdoll.dao
 
 import com.ragdoll.dao.DatabaseFactory.dbQuery
-import com.ragdoll.model.User
-import com.ragdoll.model.Users
+import com.ragdoll.model.*
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
@@ -10,11 +9,26 @@ import org.jetbrains.exposed.sql.select
 
 class DAOFacadeImpl : DAOFacade {
     private fun resultRowToUser(row: ResultRow) = User(
-        id = row[Users.id],
+        userId = row[Users.userId],
         platform = row[Users.platform],
         nickname = row[Users.nickname],
         profileImage = row[Users.profileImage],
         email = row[Users.email]
+    )
+
+    private fun resultRowGroupUser(row: ResultRow) = GroupUser(
+        userId = row[GroupUsers.userId],
+        groupId = row[GroupUsers.groupId],
+        funds = row[GroupUsers.funds]
+    )
+
+    private fun resultRowGroup(row: ResultRow) = Group(
+        groupId = row[Groups.groupId],
+        groupName = row[Groups.groupName],
+        description = row[Groups.description],
+        creator = row[Groups.creator],
+        initialFunds = row[Groups.initialFunds],
+        endDate = row[Groups.endDate].toString()
     )
 
     override suspend fun insertUser(platform: String, nickname: String, profileImage: String, email: String): Unit =
@@ -31,5 +45,16 @@ class DAOFacadeImpl : DAOFacade {
         Users.select { (Users.platform eq platform) and (Users.email eq email) }
             .map(::resultRowToUser)
             .singleOrNull()
+    }
+
+    override suspend fun getGroupUser(userId: Int): List<GroupUser> = dbQuery {
+        GroupUsers.select { GroupUsers.userId eq userId }
+            .map(::resultRowGroupUser)
+    }
+
+    override suspend fun getGroup(groupId: Int): Group = dbQuery {
+        Groups.select { Groups.groupId eq groupId }
+            .map(::resultRowGroup)
+            .single()
     }
 }
