@@ -4,20 +4,46 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ragdoll.designsystem.theme.lineSeed
 
+
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier, viewModel: LoginViewModel = hiltViewModel()) {
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+fun LoginRoute(
+    navigateToGroup: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
+    val loginState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LoginScreen(
+        modifier = modifier,
+        uiState = loginState,
+        navigateToGroup = navigateToGroup,
+        kakaoLogin = viewModel::loginWithKakaoAccount
+    )
+}
+
+@Composable
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    uiState: UserUiState,
+    navigateToGroup: (Int) -> Unit,
+    kakaoLogin: () -> Unit
+) {
+    when (uiState) {
+        is UserUiState.Success -> navigateToGroup(uiState.user.id)
+        is UserUiState.Error -> ErrorState()
+        UserUiState.Loading -> LoadingState()
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,9 +65,19 @@ fun LoginScreen(modifier: Modifier = Modifier, viewModel: LoginViewModel = hiltV
         )
         Spacer(modifier = modifier.weight(1f))
         KakaoLoginButton(modifier = Modifier.fillMaxWidth()) {
-            viewModel.kakaoLogin()
+            kakaoLogin()
         }
         Spacer(modifier = modifier.weight(1f))
     }
+
+}
+
+@Composable
+fun LoadingState() {
+
+}
+
+@Composable
+fun ErrorState() {
 
 }
