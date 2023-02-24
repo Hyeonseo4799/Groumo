@@ -48,6 +48,7 @@ android {
 dependencies {
 
     implementation(project(":feature:login"))
+    implementation(project(":feature:group"))
     implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.core)

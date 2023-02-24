@@ -1,9 +1,8 @@
 package com.ragdoll.network.retrofit
 
+import com.ragdoll.network.model.GroupResponse
 import com.ragdoll.network.model.UserResponse
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface GroumoApi {
     @POST("/user/{platform}")
@@ -12,4 +11,8 @@ interface GroumoApi {
         @Path("platform") platform: String
     ): UserResponse
 
+    @GET("/group")
+    suspend fun getGroup(
+        @Query("userId") userId: Int
+    ): List<GroupResponse>
 }
