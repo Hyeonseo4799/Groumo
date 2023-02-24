@@ -14,12 +14,14 @@ navigation = "2.5.3"
 retrofit = "2.9.0"
 androidx-lifecycle = "2.6.0-beta01"
 kotlinx-serialization = "1.4.1"
+kotlin-serialization = "1.8.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android" }
 android-library = { id = "com.android.library", version.ref = "android" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
