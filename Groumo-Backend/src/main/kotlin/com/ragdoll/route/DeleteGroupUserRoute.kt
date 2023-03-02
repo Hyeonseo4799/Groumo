@@ -1,6 +1,7 @@
 package com.ragdoll.route
 
 import com.ragdoll.dao.DAOFacade
+import com.ragdoll.model.Group
 import com.ragdoll.model.GroupUser
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -16,7 +17,10 @@ fun Route.deleteGroupUserRoute(dao: DAOFacade) {
             call.respond(HttpStatusCode.OK, emptyList<GroupUser>())
         } else {
             val groupUser = dao.deleteGroupUser(userId, groupId)
-            call.respond(HttpStatusCode.OK, groupUser)
+            val group = mutableListOf<Group>()
+
+            groupUser.forEach { group.add(dao.getGroup(it.groupId)) }
+            call.respond(HttpStatusCode.OK, group)
         }
     }
 }
