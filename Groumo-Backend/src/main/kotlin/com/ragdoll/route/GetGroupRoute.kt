@@ -12,7 +12,7 @@ fun Route.getGroupRoute(dao: DAOFacade) {
         val userId = call.request.queryParameters["userId"]?.toIntOrNull()
 
         if (userId == null) {
-            call.respond(HttpStatusCode.OK, emptyList<Group>())
+            call.respond(HttpStatusCode.OK, dao.getAllGroups())
         } else {
             val groupUser = dao.getGroupUser(userId)
             val group = mutableListOf<Group>()

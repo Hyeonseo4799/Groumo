@@ -56,6 +56,11 @@ class DAOFacadeImpl : DAOFacade {
             .single()
     }
 
+    override suspend fun getAllGroups(): List<Group> = dbQuery {
+        Groups.selectAll()
+            .map(::resultRowGroup)
+    }
+
     override suspend fun deleteGroupUser(userId: Int, groupId: Int): List<GroupUser> = dbQuery {
         GroupUsers.deleteWhere { (GroupUsers.userId eq userId) and (GroupUsers.groupId eq groupId) }
         GroupUsers.select { GroupUsers.userId eq userId }
