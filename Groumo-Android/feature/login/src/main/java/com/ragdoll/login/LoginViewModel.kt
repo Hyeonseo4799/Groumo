@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(
     application: Application,
     private val signUpUseCase: SignUpUseCase,
 ) : AndroidViewModel(application) {
-    private val _uiState = MutableStateFlow<UserUiState>(UserUiState.Loading)
+    private val _uiState = MutableStateFlow<UserUiState>(UserUiState.Success(null))
     val uiState: StateFlow<UserUiState> = _uiState.asStateFlow()
 
     init { checkToken() }

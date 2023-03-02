@@ -42,7 +42,7 @@ fun LoginScreen(
     kakaoLogin: () -> Unit
 ) {
     when (uiState) {
-        is UserUiState.Success -> navigateToGroup(uiState.user.id)
+        is UserUiState.Success -> uiState.user?.let { navigateToGroup(it.id) }
         is UserUiState.Error -> Error(uiState.message)
         UserUiState.Loading -> Loading()
     }
