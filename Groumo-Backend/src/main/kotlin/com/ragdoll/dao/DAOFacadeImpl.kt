@@ -2,10 +2,8 @@ package com.ragdoll.dao
 
 import com.ragdoll.dao.DatabaseFactory.dbQuery
 import com.ragdoll.model.*
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class DAOFacadeImpl : DAOFacade {
     private fun resultRowToUser(row: ResultRow) = User(
@@ -56,5 +54,11 @@ class DAOFacadeImpl : DAOFacade {
         Groups.select { Groups.groupId eq groupId }
             .map(::resultRowGroup)
             .single()
+    }
+
+    override suspend fun deleteGroupUser(userId: Int, groupId: Int): List<GroupUser> = dbQuery {
+        GroupUsers.deleteWhere { (GroupUsers.userId eq userId) and (GroupUsers.groupId eq groupId) }
+        GroupUsers.select { GroupUsers.userId eq userId }
+            .map(::resultRowGroupUser)
     }
 }

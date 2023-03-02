@@ -12,4 +12,6 @@ interface DAOFacade {
     suspend fun getGroupUser(userId: Int): List<GroupUser>
 
     suspend fun getGroup(groupId: Int): Group
+
+    suspend fun deleteGroupUser(userId: Int, groupId: Int): List<GroupUser>
 }

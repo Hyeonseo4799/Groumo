@@ -2,6 +2,7 @@ package com.ragdoll.plugins
 
 import com.ragdoll.dao.DAOFacade
 import com.ragdoll.dao.DAOFacadeImpl
+import com.ragdoll.route.deleteGroupUserRoute
 import com.ragdoll.route.getGroupRoute
 import com.ragdoll.route.postUserRoute
 import io.ktor.client.*
@@ -13,5 +14,6 @@ fun Application.configureRouting(client: HttpClient) {
     routing {
         postUserRoute(dao, client)
         getGroupRoute(dao)
+        deleteGroupUserRoute(dao)
     }
 }
