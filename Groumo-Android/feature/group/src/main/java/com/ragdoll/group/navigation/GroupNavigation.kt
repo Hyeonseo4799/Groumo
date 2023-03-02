@@ -13,11 +13,11 @@ fun NavController.navigationToGroup(userId: Int) {
     this.navigate("$groupRoute/$userId")
 }
 
-fun NavGraphBuilder.groupScreen() {
+fun NavGraphBuilder.groupScreen(navigateToSearch: () -> Unit) {
     composable(
         route = "$groupRoute/{userId}",
         arguments = listOf(navArgument("userId") { type = NavType.IntType })
     ) {
-        GroupRoute()
+        GroupRoute(navigateToSearch)
     }
 }

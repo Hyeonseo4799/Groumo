@@ -1,0 +1,4 @@
+<resources>
+    <string name="no_groups_founded">참여중인 그룹이 없어요.</string>
+    <string name="leave_group">그룹 떠나기</string>
+</resources>
