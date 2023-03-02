@@ -25,7 +25,12 @@ fun GroupRoute(
 ) {
     val groupState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    GroupScreen(modifier = modifier, uiState = groupState, viewModel::leaveGroup, navigateToSearch)
+    GroupScreen(
+        modifier = modifier,
+        uiState = groupState,
+        navigateToSearch,
+        viewModel::leaveGroup
+    )
 }
 
 @Composable
@@ -33,7 +38,7 @@ fun GroupScreen(
     modifier: Modifier = Modifier,
     uiState: GroupUiState,
     navigateToSearch: () -> Unit,
-    leaveGroup: () -> Unit
+    leaveGroup: (Int) -> Unit
 ) {
     when (uiState) {
         is GroupUiState.Success -> {
@@ -43,6 +48,7 @@ fun GroupScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 10.dp)
             ) {
+                Spacer(modifier = modifier.height(4.dp))
                 Image(
                     painter = painterResource(R.drawable.ic_search),
                     contentDescription = null,

@@ -8,4 +8,6 @@ interface GroumoRepository {
     suspend fun signUp(token: String, platform: String): Flow<User>
 
     suspend fun getGroup(userId: Int): Flow<List<Group>>
+
+    suspend fun leaveGroup(userId: Int, groupId: Int): Flow<List<Group>>
 }

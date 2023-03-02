@@ -21,7 +21,7 @@ import com.ragdoll.model.Group
 @Composable
 fun GroupList(
     groups: List<Group>,
-    leaveGroup: () -> Unit,
+    leaveGroup: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn {
@@ -73,7 +73,7 @@ fun GroupList(
                         fontFamily = lineSeed,
                         fontSize = 12.sp,
                         color = Color.Red,
-                        modifier = modifier.clickable { leaveGroup() }
+                        modifier = modifier.clickable { leaveGroup(group.id) }
                     )
                 }
                 Spacer(modifier = modifier.height(16.dp))

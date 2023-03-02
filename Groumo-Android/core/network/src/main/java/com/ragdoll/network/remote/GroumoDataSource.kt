@@ -7,4 +7,6 @@ interface GroumoDataSource {
     suspend fun signUp(token: String, platform: String): UserResponse
 
     suspend fun getGroup(userId: Int): List<GroupResponse>
+
+    suspend fun leaveGroup(userId: Int, groupId: Int): List<GroupResponse>
 }
