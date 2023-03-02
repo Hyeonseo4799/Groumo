@@ -1,0 +1,5 @@
+<resources>
+    <string name="loading">로딩중이에요.\n잠시만 기다려주세요.</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="error">에러가 발생했어요.\n재접속해주세요.</string>
+</resources>

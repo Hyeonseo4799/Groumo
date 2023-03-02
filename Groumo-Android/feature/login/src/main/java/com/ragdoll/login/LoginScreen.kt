@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ragdoll.designsystem.component.Loading
 import com.ragdoll.designsystem.theme.lineSeed
+import com.ragdoll.designsystem.component.Error
 
 
 @Composable
@@ -41,8 +43,8 @@ fun LoginScreen(
 ) {
     when (uiState) {
         is UserUiState.Success -> navigateToGroup(uiState.user.id)
-        is UserUiState.Error -> ErrorState()
-        UserUiState.Loading -> LoadingState()
+        is UserUiState.Error -> Error(uiState.message)
+        UserUiState.Loading -> Loading()
     }
 
     Column(
@@ -69,15 +71,5 @@ fun LoginScreen(
         }
         Spacer(modifier = modifier.weight(1f))
     }
-
-}
-
-@Composable
-fun LoadingState() {
-
-}
-
-@Composable
-fun ErrorState() {
 
 }
