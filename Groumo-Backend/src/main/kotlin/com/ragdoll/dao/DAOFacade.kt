@@ -16,4 +16,6 @@ interface DAOFacade {
     suspend fun getAllGroups(): List<Group>
 
     suspend fun deleteGroupUser(userId: Int, groupId: Int): List<GroupUser>
+
+    suspend fun insertGroupUserRoute(userId: Int, groupId: Int, funds: Int)
 }

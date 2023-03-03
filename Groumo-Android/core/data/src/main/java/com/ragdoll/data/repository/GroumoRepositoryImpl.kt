@@ -26,4 +26,7 @@ class GroumoRepositoryImpl @Inject constructor(
     override suspend fun leaveGroup(userId: Int, groupId: Int): Flow<List<Group>> = flow {
         emit(groumoDataSource.leaveGroup(userId, groupId).map { it.asGroup() })
     }
+
+    override suspend fun attendGroup(userId: Int, groupId: Int) =
+        groumoDataSource.attendGroup(userId, groupId)
 }

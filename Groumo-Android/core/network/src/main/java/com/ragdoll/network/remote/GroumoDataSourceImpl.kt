@@ -16,8 +16,10 @@ class GroumoDataSourceImpl @Inject constructor(
     override suspend fun getAllGroups(): List<GroupResponse> =
         groumoApi.getAllGroups()
 
-
     override suspend fun leaveGroup(userId: Int, groupId: Int): List<GroupResponse> =
         groumoApi.leaveGroup(userId, groupId)
+
+    override suspend fun attendGroup(userId: Int, groupId: Int) =
+        groumoApi.attendGroup(userId, groupId)
 }
 

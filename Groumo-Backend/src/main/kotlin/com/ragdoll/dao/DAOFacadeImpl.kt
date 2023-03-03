@@ -66,4 +66,12 @@ class DAOFacadeImpl : DAOFacade {
         GroupUsers.select { GroupUsers.userId eq userId }
             .map(::resultRowGroupUser)
     }
+
+    override suspend fun insertGroupUserRoute(userId: Int, groupId: Int, funds: Int): Unit = dbQuery{
+        GroupUsers.insert {
+            it[GroupUsers.userId] = userId
+            it[GroupUsers.groupId] = groupId
+            it[GroupUsers.funds] = funds
+        }
+    }
 }

@@ -24,4 +24,10 @@ interface GroumoApi {
         @Query("userId") userId: Int,
         @Query("groupId") groupId: Int
     ): List<GroupResponse>
+
+    @POST("/group/user")
+    suspend fun attendGroup(
+        @Query("userId") userId: Int,
+        @Query("groupId") groupId: Int
+    )
 }
