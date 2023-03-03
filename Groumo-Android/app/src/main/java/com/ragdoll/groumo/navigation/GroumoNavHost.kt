@@ -7,6 +7,8 @@ import com.ragdoll.group.navigation.groupScreen
 import com.ragdoll.group.navigation.navigationToGroup
 import com.ragdoll.navigation.loginRoute
 import com.ragdoll.navigation.loginScreen
+import com.ragdoll.search.navigation.navigateToSearch
+import com.ragdoll.search.navigation.searchScreen
 
 @Composable
 fun GroumoNavHost(
@@ -19,6 +21,11 @@ fun GroumoNavHost(
                 navController.navigationToGroup(userId)
             }
         )
-        groupScreen()
+        groupScreen(
+            navigateToSearch = { userId ->
+                navController.navigateToSearch(userId)
+            }
+        )
+        searchScreen()
     }
 }

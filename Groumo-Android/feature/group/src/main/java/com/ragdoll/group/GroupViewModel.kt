@@ -23,7 +23,7 @@ class GroupViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<GroupUiState>(GroupUiState.Success(emptyList()))
     val uiState: StateFlow<GroupUiState> = _uiState.asStateFlow()
 
-    private val userId: Int = checkNotNull(savedStateHandle["userId"])
+    val userId: Int = checkNotNull(savedStateHandle["userId"])
 
     init {
         getGroup()

@@ -19,7 +19,7 @@ import com.ragdoll.designsystem.theme.lineSeed
 
 @Composable
 fun GroupRoute(
-    navigateToSearch: () -> Unit,
+    navigateToSearch: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: GroupViewModel = hiltViewModel()
 ) {
@@ -27,17 +27,19 @@ fun GroupRoute(
 
     GroupScreen(
         modifier = modifier,
+        userId = viewModel.userId,
         uiState = groupState,
-        navigateToSearch,
-        viewModel::leaveGroup
+        navigateToSearch = navigateToSearch,
+        leaveGroup = viewModel::leaveGroup
     )
 }
 
 @Composable
 fun GroupScreen(
     modifier: Modifier = Modifier,
+    userId: Int,
     uiState: GroupUiState,
-    navigateToSearch: () -> Unit,
+    navigateToSearch: (Int) -> Unit,
     leaveGroup: (Int) -> Unit
 ) {
     when (uiState) {
@@ -54,9 +56,9 @@ fun GroupScreen(
                     contentDescription = null,
                     modifier = modifier
                         .align(Alignment.End)
-                        .clickable { navigateToSearch() }
+                        .clickable { navigateToSearch(userId) }
                 )
-                if (uiState.group.isEmpty()) EmptyState() else GroupList(uiState.group, leaveGroup)
+                if (uiState.group.isEmpty()) EmptyState() else MyGroupList(uiState.group, leaveGroup)
             }
         }
         is GroupUiState.Error -> Error(uiState.message)
