@@ -19,6 +19,10 @@ class GroumoRepositoryImpl @Inject constructor(
         emit(groumoDataSource.getGroup(userId).map { it.asGroup() })
     }
 
+    override suspend fun getAllGroups(): Flow<List<Group>> = flow {
+        emit(groumoDataSource.getAllGroups().map { it.asGroup() })
+    }
+
     override suspend fun leaveGroup(userId: Int, groupId: Int): Flow<List<Group>> = flow {
         emit(groumoDataSource.leaveGroup(userId, groupId).map { it.asGroup() })
     }

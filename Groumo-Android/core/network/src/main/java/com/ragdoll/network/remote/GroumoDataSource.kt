@@ -8,5 +8,7 @@ interface GroumoDataSource {
 
     suspend fun getGroup(userId: Int): List<GroupResponse>
 
+    suspend fun getAllGroups(): List<GroupResponse>
+
     suspend fun leaveGroup(userId: Int, groupId: Int): List<GroupResponse>
 }

@@ -9,5 +9,7 @@ interface GroumoRepository {
 
     suspend fun getGroup(userId: Int): Flow<List<Group>>
 
+    suspend fun getAllGroups(): Flow<List<Group>>
+
     suspend fun leaveGroup(userId: Int, groupId: Int): Flow<List<Group>>
 }

@@ -16,6 +16,9 @@ interface GroumoApi {
         @Query("userId") userId: Int
     ): List<GroupResponse>
 
+    @GET("/group/all")
+    suspend fun getAllGroups(): List<GroupResponse>
+
     @DELETE("/group/user")
     suspend fun leaveGroup(
         @Query("userId") userId: Int,
