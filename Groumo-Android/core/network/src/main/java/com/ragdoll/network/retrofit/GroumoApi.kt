@@ -11,12 +11,12 @@ interface GroumoApi {
         @Path("platform") platform: String
     ): UserResponse
 
-    @GET("/group")
+    @GET("/group/{userId}")
     suspend fun getGroup(
-        @Query("userId") userId: Int
+        @Path("userId") userId: Int
     ): List<GroupResponse>
 
-    @GET("/group/all")
+    @GET("/group")
     suspend fun getAllGroups(): List<GroupResponse>
 
     @DELETE("/group/user")
