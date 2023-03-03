@@ -9,7 +9,11 @@ import io.ktor.server.routing.*
 
 fun Route.getGroupRoute(dao: DAOFacade) {
     get("group") {
-        val userId = call.request.queryParameters["userId"]?.toIntOrNull()
+        call.respond(HttpStatusCode.OK, dao.getAllGroups())
+    }
+
+    get("group/{userId}") {
+        val userId = call.parameters["userId"]?.toIntOrNull()
 
         if (userId == null) {
             call.respond(HttpStatusCode.OK, dao.getAllGroups())
