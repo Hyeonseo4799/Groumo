@@ -38,6 +38,5 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.lifecycle)
-    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
     kapt(libs.hilt.compiler)
 }

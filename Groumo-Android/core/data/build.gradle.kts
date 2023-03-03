@@ -27,5 +27,6 @@ dependencies {
     implementation(libs.android.material)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt)
+    implementation(libs.androidx.paging.runtime)
     kapt(libs.hilt.compiler)
 }
