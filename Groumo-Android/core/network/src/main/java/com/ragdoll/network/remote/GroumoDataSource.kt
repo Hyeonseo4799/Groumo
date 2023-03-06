@@ -13,4 +13,6 @@ interface GroumoDataSource {
     suspend fun leaveGroup(userId: Int, groupId: Int): List<GroupResponse>
 
     suspend fun attendGroup(userId: Int, groupId: Int)
+
+    fun checkAttendance(userId: Int): Boolean
 }
