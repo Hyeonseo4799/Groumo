@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -33,6 +34,7 @@ fun GroupRoute(
         userId = viewModel.userId,
         uiState = groupState,
         navigateToSearch = navigateToSearch,
+        getGroup = viewModel::getGroup,
         leaveGroup = viewModel::leaveGroup
     )
 }
@@ -43,9 +45,12 @@ fun GroupScreen(
     userId: Int,
     uiState: GroupUiState,
     navigateToSearch: (Int) -> Unit,
+    getGroup: () -> Unit,
     leaveGroup: (Int) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+
+    LaunchedEffect(Unit) { getGroup() }
 
     when (uiState) {
         is GroupUiState.Success -> {

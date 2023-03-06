@@ -25,11 +25,7 @@ class GroupViewModel @Inject constructor(
 
     val userId: Int = checkNotNull(savedStateHandle["userId"])
 
-    init {
-        getGroup()
-    }
-
-    private fun getGroup() {
+    fun getGroup() {
         viewModelScope.launch {
             getGroupUseCase(userId).asResult().collect { result ->
                 when (result) {
