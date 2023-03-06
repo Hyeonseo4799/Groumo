@@ -9,8 +9,12 @@ import com.ragdoll.group.GroupRoute
 
 const val groupRoute = "group_route"
 
-fun NavController.navigationToGroup(userId: Int) {
-    this.navigate("$groupRoute/$userId")
+fun NavController.navigationToGroup(userId: Int, loginRoute: String) {
+    this.navigate("$groupRoute/$userId") {
+        popUpTo(route = loginRoute) {
+            inclusive = true
+        }
+    }
 }
 
 fun NavGraphBuilder.groupScreen(navigateToSearch: (Int) -> Unit) {

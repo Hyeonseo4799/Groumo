@@ -18,7 +18,7 @@ fun GroumoNavHost(
     NavHost(navController = navController, startDestination = startDefinition) {
         loginScreen(
             navigateToLogin = { userId ->
-                navController.navigationToGroup(userId)
+                navController.navigationToGroup(userId, loginRoute)
             }
         )
         groupScreen(
