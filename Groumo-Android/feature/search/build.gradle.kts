@@ -38,5 +38,6 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.lifecycle)
+    implementation(libs.navigation.animation)
     kapt(libs.hilt.compiler)
 }

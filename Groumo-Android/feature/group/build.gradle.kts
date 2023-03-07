@@ -38,5 +38,6 @@ dependencies {
     implementation(libs.androidx.hilt)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle)
+    implementation(libs.navigation.animation)
     kapt(libs.hilt.compiler)
 }

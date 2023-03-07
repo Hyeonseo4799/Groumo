@@ -1,9 +1,10 @@
 package com.ragdoll.group.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.navArgument
 import com.ragdoll.group.GroupRoute
 
@@ -17,10 +18,13 @@ fun NavController.navigationToGroup(userId: Int, loginRoute: String) {
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.groupScreen(navigateToSearch: (Int) -> Unit) {
     composable(
         route = "$groupRoute/{userId}",
-        arguments = listOf(navArgument("userId") { type = NavType.IntType })
+        arguments = listOf(
+            navArgument("userId") { type = NavType.IntType }
+        )
     ) {
         GroupRoute(navigateToSearch)
     }
