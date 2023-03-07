@@ -58,7 +58,7 @@ fun GroupScreen(
                 modifier = modifier
                     .systemBarsPadding()
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp)
+                    .padding(horizontal = 20.dp)
             ) {
                 Spacer(modifier = modifier.height(4.dp))
                 Image(
