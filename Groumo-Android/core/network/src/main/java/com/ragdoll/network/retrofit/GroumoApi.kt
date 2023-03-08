@@ -30,9 +30,4 @@ interface GroumoApi {
         @Query("userId") userId: Int,
         @Query("groupId") groupId: Int
     )
-
-    @GET("/group/user")
-    fun checkAttendance(
-        @Query("userId") userId: Int
-    ): Boolean
 }

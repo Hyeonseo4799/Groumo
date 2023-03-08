@@ -29,7 +29,4 @@ class GroumoRepositoryImpl @Inject constructor(
 
     override suspend fun attendGroup(userId: Int, groupId: Int) =
         groumoDataSource.attendGroup(userId, groupId)
-
-    override fun checkAttendance(userId: Int): Boolean =
-        groumoDataSource.checkAttendance(userId)
 }

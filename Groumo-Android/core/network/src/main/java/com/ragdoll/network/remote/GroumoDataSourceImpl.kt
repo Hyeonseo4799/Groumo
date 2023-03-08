@@ -21,8 +21,5 @@ class GroumoDataSourceImpl @Inject constructor(
 
     override suspend fun attendGroup(userId: Int, groupId: Int) =
         groumoApi.attendGroup(userId, groupId)
-
-    override fun checkAttendance(userId: Int): Boolean =
-        groumoApi.checkAttendance(userId)
 }
 

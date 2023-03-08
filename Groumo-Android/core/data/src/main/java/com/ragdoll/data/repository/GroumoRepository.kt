@@ -14,6 +14,4 @@ interface GroumoRepository {
     suspend fun leaveGroup(userId: Int, groupId: Int): Flow<List<Group>>
 
     suspend fun attendGroup(userId: Int, groupId: Int)
-
-    fun checkAttendance(userId: Int): Boolean
 }
