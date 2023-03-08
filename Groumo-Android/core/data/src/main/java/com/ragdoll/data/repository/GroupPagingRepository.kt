@@ -5,5 +5,5 @@ import com.ragdoll.model.Group
 import kotlinx.coroutines.flow.Flow
 
 interface GroupPagingRepository {
-    fun getAllGroups(): Flow<PagingData<Group>>
+    fun getAllGroups(input: String?): Flow<PagingData<Group>>
 }

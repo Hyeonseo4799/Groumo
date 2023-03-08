@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetAllGroupsUseCase @Inject constructor(
     private val groupPagingRepository: GroupPagingRepository
 ) {
-    operator fun invoke() = groupPagingRepository.getAllGroups()
+    operator fun invoke(input: String?) = groupPagingRepository.getAllGroups(input)
 }

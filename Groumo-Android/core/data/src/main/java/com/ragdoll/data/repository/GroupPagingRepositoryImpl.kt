@@ -15,10 +15,10 @@ import javax.inject.Inject
 class GroupPagingRepositoryImpl @Inject constructor(
     private val groumoApi: GroumoApi
 ) : GroupPagingRepository {
-    override fun getAllGroups(): Flow<PagingData<Group>> {
+    override fun getAllGroups(input: String?): Flow<PagingData<Group>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = { GroupPagingDataSource(groumoApi) }
+            pagingSourceFactory = { GroupPagingDataSource(groumoApi, input) }
         ).flow.map { pagingData ->
             pagingData.map { it.asGroup() }
         }
