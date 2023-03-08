@@ -1,34 +1,62 @@
 package com.ragdoll.search
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.paging.compose.LazyPagingItems
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ragdoll.designsystem.component.Error
+import com.ragdoll.designsystem.component.Loading
 import com.ragdoll.model.Group
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun SearchRoute(
     modifier: Modifier = Modifier,
-    viewModel: SearchViewModel = hiltViewModel(),
+    viewModel: SearchViewModel = hiltViewModel()
 ) {
-    val groups = viewModel.getAllGroups().collectAsLazyPagingItems()
+    val searchState by viewModel.uiState.collectAsStateWithLifecycle()
+
     SearchScreen(
         modifier = modifier,
-        groups = groups,
-        attendGroup = viewModel::attendGroup
+        uiState = searchState,
+        getAllGroups = viewModel::getAllGroups,
+        attendGroup = viewModel::attendGroup,
+        checkAttendance = viewModel::checkAttendance,
     )
 }
 
 @Composable
 fun SearchScreen(
     modifier: Modifier = Modifier,
-    groups: LazyPagingItems<Group>,
-    attendGroup: (Int) -> Unit
+    uiState: SearchUiState,
+    getAllGroups: (String?) -> Flow<PagingData<Group>>,
+    attendGroup: (Int) -> Unit,
+    checkAttendance: (List<Group>, Group) -> Boolean
 ) {
-    Column(modifier = modifier.systemBarsPadding()) {
-        GroupList(groups, attendGroup)
+    var input by remember { mutableStateOf<String?>(null) }
+    val groups = getAllGroups(input).collectAsLazyPagingItems()
+
+    when (uiState) {
+        is SearchUiState.Success -> {
+            Column(
+                modifier = modifier
+                    .systemBarsPadding()
+                    .padding(horizontal = 20.dp)
+            ) {
+                SearchBar { input = it }
+                GroupList(
+                    groups = groups,
+                    userGroups = uiState.groups,
+                    attendGroup = attendGroup,
+                    checkAttendance = checkAttendance
+                )
+            }
+        }
+        is SearchUiState.Error -> Error(message = uiState.message)
+        SearchUiState.Loading -> Loading()
     }
 }
