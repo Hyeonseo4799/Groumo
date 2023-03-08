@@ -60,7 +60,7 @@ fun GroupScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
             ) {
-                Spacer(modifier = modifier.height(4.dp))
+                Spacer(modifier = modifier.height(14.dp))
                 Image(
                     painter = painterResource(R.drawable.ic_search),
                     contentDescription = null,
