@@ -1,7 +1,6 @@
 package com.ragdoll.search.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.*
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -20,7 +19,8 @@ fun NavGraphBuilder.searchScreen() {
     composable(
         route = "$searchRoute/{userId}",
         arguments = listOf(navArgument("userId") { type = NavType.IntType }),
-        enterTransition = { slideInVertically(initialOffsetY = { 200 }) }
+        enterTransition = { slideInVertically(initialOffsetY = { 200 }) },
+        exitTransition = { ExitTransition.None }
     ) {
         SearchRoute()
     }

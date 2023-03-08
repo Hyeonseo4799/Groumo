@@ -1,5 +1,7 @@
 package com.ragdoll.group.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -24,7 +26,9 @@ fun NavGraphBuilder.groupScreen(navigateToSearch: (Int) -> Unit) {
         route = "$groupRoute/{userId}",
         arguments = listOf(
             navArgument("userId") { type = NavType.IntType }
-        )
+        ),
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
     ) {
         GroupRoute(navigateToSearch)
     }
