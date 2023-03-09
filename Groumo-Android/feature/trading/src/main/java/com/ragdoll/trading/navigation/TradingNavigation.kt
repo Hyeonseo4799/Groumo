@@ -1,4 +1,4 @@
-package com.ragdoll.group.navigation
+package com.ragdoll.trading.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -8,31 +8,31 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.navArgument
-import com.ragdoll.group.GroupRoute
+import com.ragdoll.trading.TradingRoute
 
-const val groupRoute = "group_route"
+const val tradingRoute = "trading_route"
 
-fun NavController.navigationToGroup(userId: Int, loginRoute: String) {
-    this.navigate("$groupRoute/$userId") {
-        popUpTo(route = loginRoute) {
-            inclusive = true
-        }
-    }
+fun NavController.navigateToTrading(userId: Int, groupId: Int) {
+    this.navigate("$tradingRoute/$userId/$groupId")
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.groupScreen(
-    navigateToSearch: (Int) -> Unit,
+fun NavGraphBuilder.tradingScreen(
+    navigateToMypage: (Int, Int) -> Unit,
     navigateToHome: (Int, Int) -> Unit
 ) {
     composable(
-        route = "$groupRoute/{userId}",
+        route = "$tradingRoute/{userId}/{groupId}",
         arguments = listOf(
-            navArgument("userId") { type = NavType.IntType }
+            navArgument("userId") { type = NavType.IntType },
+            navArgument("groupId") { type = NavType.IntType }
         ),
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
-        GroupRoute(navigateToSearch, navigateToHome)
+        TradingRoute(
+            navigateToMypage = navigateToMypage,
+            navigateToHome = navigateToHome
+        )
     }
 }

@@ -1,10 +1,12 @@
 package com.ragdoll.group
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,6 +25,7 @@ import com.ragdoll.designsystem.theme.lineSeed
 @Composable
 fun GroupRoute(
     navigateToSearch: (Int) -> Unit,
+    navigateToHome: (Int, Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: GroupViewModel = hiltViewModel()
 ) {
@@ -34,6 +36,7 @@ fun GroupRoute(
         userId = viewModel.userId,
         uiState = groupState,
         navigateToSearch = navigateToSearch,
+        navigateToHome = navigateToHome,
         getGroup = viewModel::getGroup,
         leaveGroup = viewModel::leaveGroup
     )
@@ -45,6 +48,7 @@ fun GroupScreen(
     userId: Int,
     uiState: GroupUiState,
     navigateToSearch: (Int) -> Unit,
+    navigateToHome: (Int, Int) -> Unit,
     getGroup: () -> Unit,
     leaveGroup: (Int) -> Unit
 ) {
@@ -61,8 +65,8 @@ fun GroupScreen(
                     .padding(horizontal = 20.dp)
             ) {
                 Spacer(modifier = modifier.height(14.dp))
-                Image(
-                    painter = painterResource(R.drawable.ic_search),
+                Icon(
+                    imageVector = Icons.Default.Search,
                     contentDescription = null,
                     modifier = modifier
                         .align(Alignment.End)
@@ -72,7 +76,7 @@ fun GroupScreen(
                             interactionSource = interactionSource
                         )
                 )
-                if (uiState.group.isEmpty()) EmptyState() else MyGroupList(uiState.group, leaveGroup)
+                if (uiState.group.isEmpty()) EmptyState() else MyGroupList(userId, uiState.group, navigateToHome, leaveGroup)
             }
         }
         is GroupUiState.Error -> Error(uiState.message)

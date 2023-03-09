@@ -23,7 +23,9 @@ import com.ragdoll.model.Group
 
 @Composable
 fun MyGroupList(
+    userId: Int,
     groups: List<Group>,
+    navigateToHome: (Int, Int) -> Unit,
     leaveGroup: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -33,7 +35,9 @@ fun MyGroupList(
         itemsIndexed(groups) { index, group ->
             Column(
                 horizontalAlignment = Alignment.Start,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clickable { navigateToHome(userId, group.id) }
             ) {
                 Spacer(modifier = modifier.height(16.dp))
                 Text(

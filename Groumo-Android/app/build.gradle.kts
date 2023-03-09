@@ -50,6 +50,9 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:group"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:mypage"))
+    implementation(project(":feature:trading"))
     implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.core)

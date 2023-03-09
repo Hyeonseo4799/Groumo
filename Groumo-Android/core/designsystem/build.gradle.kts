@@ -1,3 +1,4 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin)
@@ -22,5 +23,6 @@ android {
 dependencies {
 
     implementation(libs.android.material)
+    implementation(libs.androidx.material)
     implementation(libs.androidx.compose.material3)
 }

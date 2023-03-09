@@ -12,16 +12,17 @@ import com.ragdoll.designsystem.theme.GroumoTheme
 import com.ragdoll.groumo.navigation.GroumoNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
+@OptIn(ExperimentalAnimationApi::class)
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GroumoTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
+                    val navController = rememberAnimatedNavController()
 
-                    GroumoNavHost(navController = rememberAnimatedNavController())
+                    GroumoNavHost(navController = navController)
                 }
             }
         }
