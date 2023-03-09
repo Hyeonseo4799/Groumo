@@ -18,6 +18,7 @@ kotlin-serialization = "1.8.0"
 paging = "3.1.1"
 paging-compose = "1.0.0-alpha18"
 navigation-animation = "0.29.1-alpha"
+androidx-material = "1.3.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android" }
@@ -44,4 +45,6 @@ androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", 
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "navigation-animation"}
+navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "navigation-animation" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "androidx-material" }
+androidx-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-material" }
