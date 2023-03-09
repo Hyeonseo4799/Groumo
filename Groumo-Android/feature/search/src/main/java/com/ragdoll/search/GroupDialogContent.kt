@@ -61,7 +61,10 @@ fun GroupDialogContent(
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = stringResource(R.string.attend_group))
+                Text(
+                    text = stringResource(R.string.attend_group),
+                    color = Color.White
+                )
             }
         }
     }
