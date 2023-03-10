@@ -9,27 +9,17 @@ import com.ragdoll.home.HomeRoute
 
 const val homeRoute = "home_route"
 
-fun NavController.navigateToHome(userId: Int, groupId: Int) {
-    this.navigate("$homeRoute/$userId/$groupId")
+fun NavController.navigateToHome(navOptions: NavOptions? = null) {
+    this.navigate(homeRoute, navOptions)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.homeScreen(
-    navigateToMypage: (Int, Int) -> Unit,
-    navigateToTrading: (Int, Int) -> Unit
-) {
+fun NavGraphBuilder.homeScreen() {
     composable(
-        route = "$homeRoute/{userId}/{groupId}",
-        arguments = listOf(
-            navArgument("userId") { type = NavType.IntType },
-            navArgument("groupId") { type = NavType.IntType }
-        ),
+        route = homeRoute,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
-        HomeRoute(
-            navigateToMypage = navigateToMypage,
-            navigateToTrading = navigateToTrading
-        )
+        HomeRoute()
     }
 }

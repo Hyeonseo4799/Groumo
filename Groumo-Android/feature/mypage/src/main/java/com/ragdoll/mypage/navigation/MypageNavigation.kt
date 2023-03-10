@@ -3,37 +3,23 @@ package com.ragdoll.mypage.navigation
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
+import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
-import androidx.navigation.navArgument
 import com.ragdoll.mypage.MypageRoute
 
 const val mypageRoute = "mypage_route"
 
-fun NavController.navigateToMypage(userId: Int, groupId: Int) {
-    this.navigate("$mypageRoute/$userId/$groupId") {
-    }
+fun NavController.navigateToMypage(navOptions: NavOptions? = null) {
+    this.navigate(mypageRoute, navOptions)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.mypageScreen(
-    navigateToHome: (Int, Int) -> Unit,
-    navigateToTrading: (Int, Int) -> Unit
-) {
+fun NavGraphBuilder.mypageScreen() {
     composable(
-        route = "$mypageRoute/{userId}/{groupId}",
-        arguments = listOf(
-            navArgument("userId") { type = NavType.IntType },
-            navArgument("groupId") { type = NavType.IntType }
-        ),
+        route = mypageRoute,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
-        MypageRoute(
-            navigateToHome = navigateToHome,
-            navigateToTrading = navigateToTrading
-        )
+        MypageRoute()
     }
 }

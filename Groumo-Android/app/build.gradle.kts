@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":feature:mypage"))
     implementation(project(":feature:trading"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:common"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
@@ -66,6 +67,7 @@ dependencies {
     implementation(libs.androidx.hilt)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.navigation.animation)
+    implementation(libs.androidx.material.icons)
     kapt(libs.hilt.compiler)
 }
 

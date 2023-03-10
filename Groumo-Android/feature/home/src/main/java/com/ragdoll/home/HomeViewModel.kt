@@ -6,6 +6,5 @@ import androidx.lifecycle.ViewModel
 class HomeViewModel (
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
-    val userId: Int = savedStateHandle["userId"]!!
-    val groupId: Int = savedStateHandle["groupId"]!!
+
 }

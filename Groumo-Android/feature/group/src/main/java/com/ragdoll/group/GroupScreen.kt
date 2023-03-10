@@ -25,7 +25,7 @@ import com.ragdoll.designsystem.theme.lineSeed
 @Composable
 fun GroupRoute(
     navigateToSearch: (Int) -> Unit,
-    navigateToHome: (Int, Int) -> Unit,
+    navigateToHome: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: GroupViewModel = hiltViewModel()
 ) {
@@ -48,7 +48,7 @@ fun GroupScreen(
     userId: Int,
     uiState: GroupUiState,
     navigateToSearch: (Int) -> Unit,
-    navigateToHome: (Int, Int) -> Unit,
+    navigateToHome: () -> Unit,
     getGroup: () -> Unit,
     leaveGroup: (Int) -> Unit
 ) {
@@ -76,7 +76,7 @@ fun GroupScreen(
                             interactionSource = interactionSource
                         )
                 )
-                if (uiState.group.isEmpty()) EmptyState() else MyGroupList(userId, uiState.group, navigateToHome, leaveGroup)
+                if (uiState.group.isEmpty()) EmptyState() else MyGroupList(uiState.group, navigateToHome, leaveGroup)
             }
         }
         is GroupUiState.Error -> Error(uiState.message)

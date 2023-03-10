@@ -23,7 +23,7 @@ fun NavController.navigationToGroup(userId: Int, loginRoute: String) {
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.groupScreen(
     navigateToSearch: (Int) -> Unit,
-    navigateToHome: (Int, Int) -> Unit
+    navigateToHome: () -> Unit
 ) {
     composable(
         route = "$groupRoute/{userId}",
