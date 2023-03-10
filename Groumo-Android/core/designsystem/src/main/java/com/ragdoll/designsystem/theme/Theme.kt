@@ -14,12 +14,14 @@ import androidx.core.view.*
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkRed,
-    primaryContainer = DarkGray
+    primaryContainer = DarkGray,
+    secondary = DarkRed
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = DarkRed,
-    primaryContainer = Color.White
+    primaryContainer = Color.White,
+    secondary = LightRed
 )
 
 @Composable

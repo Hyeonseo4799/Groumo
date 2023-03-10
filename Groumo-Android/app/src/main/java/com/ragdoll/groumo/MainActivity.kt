@@ -17,7 +17,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ragdoll.common.destination.Destination
@@ -77,7 +79,7 @@ private fun GroumoBottomBar(
     currentRoute: String?,
     modifier: Modifier = Modifier
 ) {
-    GroumoNavBar(modifier = modifier) {
+    GroumoNavBar(modifier = modifier.shadow(10.dp)) {
         destinations.forEach { destination ->
             val selected = currentRoute?.let { destination.route == currentRoute } ?: false
 
