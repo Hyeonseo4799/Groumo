@@ -9,9 +9,12 @@ import com.ragdoll.route.postUserRoute
 import io.ktor.client.*
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
+import org.koin.ktor.ext.inject
 
-fun Application.configureRouting(client: HttpClient) {
-    val dao: DAOFacade = DAOFacadeImpl()
+fun Application.configureRouting() {
+    val dao by inject<DAOFacade>()
+    val client by inject<HttpClient>()
+
     routing {
         postUserRoute(dao, client)
         getGroupRoute(dao)

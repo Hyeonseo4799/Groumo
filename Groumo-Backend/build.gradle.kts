@@ -3,6 +3,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val exposed_version : String by project
 val h2_version : String by project
+val koin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.0"
@@ -38,6 +39,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.insert-koin:koin-ktor:$koin_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
