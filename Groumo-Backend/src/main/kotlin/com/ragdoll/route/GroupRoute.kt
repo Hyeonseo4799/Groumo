@@ -7,7 +7,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.getGroupRoute(dao: DAOFacade) {
+fun Route.groupRoute(dao: DAOFacade) {
     get("group") {
         call.respond(HttpStatusCode.OK, dao.getAllGroups())
     }

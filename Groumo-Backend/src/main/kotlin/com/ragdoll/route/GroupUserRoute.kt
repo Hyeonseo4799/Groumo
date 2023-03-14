@@ -8,7 +8,18 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.deleteGroupUserRoute(dao: DAOFacade) {
+fun Route.groupUserRoute(dao: DAOFacade) {
+    post("group/user") {
+        val userId = call.request.queryParameters["userId"]!!.toInt()
+        val groupId = call.request.queryParameters["groupId"]!!.toInt()
+
+        val funds = dao.getGroup(groupId).initialFunds
+
+        dao.insertGroupUserRoute(userId, groupId, funds)
+
+        call.respond(HttpStatusCode.OK)
+    }
+
     delete("group/user") {
         val userId = call.request.queryParameters["userId"]?.toIntOrNull()
         val groupId = call.request.queryParameters["groupId"]?.toIntOrNull()
